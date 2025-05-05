@@ -20,13 +20,13 @@ particlesJS(
         },
       },
       color: {
-        value: "#000000",
+        value: "#f7f7f7",
       },
       shape: {
-        type: "circle",
+        type: "star",
         stroke: {
-          width: 0,
-          color: "#000000",
+          width: 2,
+          color: ["rgba(255,255,255,0.8)", "rgba(255,255,200,0.7)", "rgba(173,216,230,0.8)"],
         },
         polygon: {
           nb_sides: 5,
@@ -39,41 +39,41 @@ particlesJS(
       },
       opacity: {
         value: 0.5,
-        random: false,
+        random: true,
         anim: {
-          enable: false,
+          enable: true,
           speed: 1,
           opacity_min: 0.1,
           sync: false,
         },
       },
       size: {
-        value: 5,
+        value: 3,
         random: true,
         anim: {
-          enable: false,
-          speed: 40,
-          size_min: 0.1,
+          enable: true,
+          speed: 39,
+          size_min: 0.81,
           sync: false,
         },
       },
       line_linked: {
         enable: true,
-        distance: 150,
-        color: "#000000",
-        opacity: 0.4,
-        width: 1,
+        distance: 144,
+        color: "#1a1a2e",
+        opacity: 0.47,
+        width: 1.6,
       },
       move: {
         enable: true,
-        speed: 6,
+        speed: 5,
         direction: "none",
-        random: false,
+        random: true,
         straight: false,
         out_mode: "out",
         attract: {
           enable: false,
-          rotateX: 600,
+          rotateX: 561,
           rotateY: 1200,
         },
       },
@@ -106,7 +106,7 @@ particlesJS(
           speed: 3,
         },
         repulse: {
-          distance: 200,
+          distance: 203,
         },
         push: {
           particles_nb: 4,
@@ -119,7 +119,7 @@ particlesJS(
     retina_detect: true,
     config_demo: {
       hide_card: false,
-      background_color: "#000000",
+      background_color: "#1a1a2e",
       background_image: "",
       background_position: "50% 50%",
       background_repeat: "no-repeat",
