@@ -69,7 +69,7 @@ header {
   justify-content: space-between;
   padding: 1.7rem 10%;
   height: 6.5rem;
-  background-color: #fff;
+  background-color: #ffffff;
   box-shadow: 0 1px 4px rgba(146, 161, 176, 0.3);
 }
 section {
@@ -313,32 +313,33 @@ header .navbar ul li a:hover {
   text-align: center;
   margin-right: 8px;
   border-radius: 100%;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
+  box-shadow: 0 0 8px rgba(0, 217, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
-.social-icons a:active,
-.social-icons a:focus,
-.social-icons a:hover {
+.social-icons a:hover,
+.social-icons a:focus {
   color: #fff;
-  background-color: #0685da;
+  transform: translateY(-6px) scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 217, 255, 0.6);
 }
 .social-icons a.github:hover {
-  background-color: #0e0e0e;
+  background-color: #24292e;
 }
 .social-icons a.twitter:hover {
-  background-color: #00aced;
+  background-color: #1da1f2;
 }
 .social-icons a.linkedin:hover {
-  background-color: #007bb6;
+  background-color: #0a66c2;
 }
 .social-icons a.dev:hover {
-  background-color: #070707;
+  background-color: #171717;
 }
 .social-icons a.instagram:hover {
-  background-color: #ee00da;
+  background-color: #e1306c;
 }
 /* social icons end */
+
+
 
 /* hero media queries starts*/
 @media (max-width: 450px) {
@@ -362,118 +363,145 @@ header .navbar ul li a:hover {
 /* hero section end */
 
 /* about section starts */
-.about {
-  background: rgb(255, 255, 255);
-}
 .about .row {
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
+  gap: 3rem;
   flex-wrap: wrap;
-  padding: 4rem;
+  padding: 4rem 6%;
+  justify-content: center;
+  align-items: center;
 }
+
 .about .row .image {
-  text-align: center;
-  flex: 1 1 35rem;
+  flex: 1 1 30rem;
 }
+
 .about .row .image img {
-  margin: 4rem;
-  width: 30rem;
+  margin: 2rem auto;
+  width: 28rem;
   height: auto;
-  border-radius: 5%;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
-  mix-blend-mode: luminosity;
-  transition: 0.3s;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 0, 180, 0.5);
+  box-shadow: 0 0 10px rgba(255, 0, 180, 0.3), 0 0 20px rgba(0, 255, 255, 0.2);
+  transition: 0.4s ease;
   cursor: pointer;
+  filter: grayscale(60%);
 }
+
 .about .row .image img:hover {
-  mix-blend-mode: normal;
+  filter: grayscale(0%);
+  transform: scale(1.03);
+  border: 2px solid rgba(255, 0, 180, 0.8);
+  box-shadow: 0 0 16px rgba(255, 0, 180, 0.6), 0 0 30px rgba(0, 255, 255, 0.4);
 }
+
 .about .row .content {
   flex: 1 1 45rem;
-  padding: 3rem;
+  padding: 2rem;
 }
+
 .about .row .content h3 {
-  color: rgb(27, 27, 27);
-  font-size: 2.5rem;
-}
-.about .row .content .tag {
-  font-size: 1.4rem;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
   color: #020133;
-  font-weight: 600;
-  margin-top: 1rem;
 }
+
+.about .row .content .tag {
+  font-size: 1.6rem;
+  color: #00308f;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
 .about .row .content p {
   font-size: 1.5rem;
-  margin-top: 1.5rem;
-  font-family: "Nunito";
-  font-weight: 600;
-  text-transform: none;
+  line-height: 2.3rem;
+  font-family: "Nunito", sans-serif;
+  font-weight: 500;
+  margin-bottom: 2rem;
 }
+
 .about .row .content .box-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  font-family: "Nunito";
-  font-weight: 600;
+  gap: 2rem;
 }
+
 .about .row .content .box-container .box p {
-  text-transform: none;
+  font-size: 1.4rem;
+  line-height: 1.9rem;
 }
+
 .about .row .content .box-container .box p span {
   color: #011aff;
+  font-weight: 600;
 }
+
+/* Resume Button */
 .resumebtn {
-  margin-top: 6rem;
+  margin-top: 4rem;
 }
+
 .resumebtn .btn {
-  padding: 1.7rem 3rem;
+  padding: 1.4rem 2.5rem;
   border-radius: 0.5em;
-  transition: 0.3s;
   color: #fff;
   background: #2506ad;
-  box-shadow: 0px 5px 10px rgba(48, 68, 247, 0.6);
   font-family: "Nunito", sans-serif;
-}
-.resumebtn .btn span {
   font-weight: 600;
-  font-size: 1.8rem;
-  letter-spacing: 0.1rem;
+  font-size: 1.7rem;
+  letter-spacing: 0.05rem;
+  box-shadow: 0 4px 15px rgba(48, 68, 247, 0.4);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
 }
+
 .resumebtn .btn i {
-  margin-left: 0.3rem;
-  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  font-size: 1.4rem;
   transition: 0.3s;
 }
+
 .resumebtn .btn:hover {
   background: #1a047e;
+  box-shadow: 0 6px 20px rgba(26, 4, 126, 0.5);
 }
+
 .resumebtn .btn:hover i {
-  transform: translateX(5px);
+  transform: translateX(6px);
 }
-/* about media queries starts*/
+
+/* about media queries starts */
 @media screen and (max-width: 600px) {
-  .about .row .image {
-    margin-top: 2rem;
-  }
-  .about .row .image img {
-    margin: 0 auto;
-    width: 80%;
-    mix-blend-mode: normal;
-  }
   .about .row {
-    padding: 0.5rem;
-    margin-bottom: 7rem;
+    padding: 2rem 1rem;
+    margin-bottom: 5rem;
+    flex-direction: column;
   }
+
+  .about .row .image {
+    margin-top: 1rem;
+  }
+
+  .about .row .image img {
+    width: 85%;
+    margin: 0 auto;
+    filter: grayscale(0%);
+  }
+
   .about .row .content {
-    padding: 1rem;
+    padding: 1.5rem;
   }
+
   .about .row .content .box-container {
-    gap: 0;
+    gap: 1rem;
   }
 }
-/* about media queries ends*/
 /* about section ends */
+
+
 
 /* skills section starts */
 .skills {
@@ -489,7 +517,7 @@ header .navbar ul li a:hover {
   color: #ffdf00; /* more readable yellow */
 }
 .skills .container {
-  background: rgba(0, 0, 22, 0.5); /* slightly more transparent */
+  background: rgba(0, 0, 22, 0.5); 
   color: #fff;
   border-radius: 1.2rem;
   padding: 2.5rem 2rem;
@@ -514,15 +542,17 @@ header .navbar ul li a:hover {
 .skills .container .bar {
   margin-bottom: 15px;
   padding: 20px 10px;
-  border-radius: 1.5rem;
+  border-radius: 50%;
   background: linear-gradient(145deg, rgba(0, 0, 50, 0.85), rgba(10, 10, 70, 0.9));
   box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4),
               -6px -6px 12px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 4px solid rgb(26, 198, 221);
   backdrop-filter: blur(4px);
   text-align: center; /* Ensures text and icon are centered */
 }
+
+
 
 .skills .container .bar:hover {
   box-shadow: 0 12px 25px rgba(0, 0, 100, 0.7);
