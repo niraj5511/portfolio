@@ -506,7 +506,7 @@ header .navbar ul li a:hover {
 /* skills section starts */
 .skills {
   min-height: 90vh;
-  background: linear-gradient(135deg, #1e3c72, #da09a5); /* kept original */
+  background: linear-gradient(to bottom, #000031, #00002c); /* kept original */
 }
 .skills h2 {
   color: #fff;
@@ -517,7 +517,7 @@ header .navbar ul li a:hover {
   color: #ffdf00; /* more readable yellow */
 }
 .skills .container {
-  background: rgba(0, 0, 22, 0.5); 
+  background: rgba(18, 18, 54, 0.671); 
   color: #fff;
   border-radius: 1.2rem;
   padding: 2.5rem 2rem;
@@ -555,7 +555,7 @@ header .navbar ul li a:hover {
 
 
 .skills .container .bar:hover {
-  box-shadow: 0 12px 25px rgba(0, 0, 100, 0.7);
+  box-shadow: 0 12px 25px rgb(240, 7, 7);
   background-color: rgba(5, 5, 40, 0.95);
   transform: scale(1.03) translateY(-4px);
 }
@@ -720,7 +720,6 @@ header .navbar ul li a:hover {
 
 /* work section starts */
 .work {
-  /* background: #010124; */
   background: linear-gradient(to bottom, #000031, #00002c);
 }
 .work h2 {
@@ -729,6 +728,14 @@ header .navbar ul li a:hover {
 }
 .work .heading span {
   color: rgb(255, 230, 0);
+}
+.work .quote {
+  font-size: 1.75rem;
+  color: #ffe600;
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  margin-top: 0.5rem;
 }
 .work .box-container {
   display: flex;
@@ -842,7 +849,12 @@ header .navbar ul li a:hover {
 .experience .timeline {
   position: relative;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 2rem auto;
+}
+.experience .quote {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 .experience .timeline::after {
   content: "";

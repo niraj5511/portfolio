@@ -161,8 +161,7 @@ header .navbar ul li a:hover {
 
 /* work section starts */
 .work {
-  /* background: #010124; */
-  background: linear-gradient(to bottom, #010136, #00003a);
+  background: linear-gradient(to bottom, #000031, #00002c);
   margin-top: 5rem;
 }
 .work h2 {
@@ -208,12 +207,10 @@ header .navbar ul li a:hover {
 .work .box-container .box {
   flex: 1 1 30rem;
   border-radius: 0.5rem;
-  box-shadow: 0 0.7rem 1rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
   height: 30rem;
-  background: #fff;
-  border: none;
 }
 .work .box-container .box img {
   height: 100%;

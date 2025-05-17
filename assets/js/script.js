@@ -40,9 +40,31 @@ $(document).ready(function () {
     );
   });
 
-  // <!-- emailjs to mail contact form data -->
+  // <!-- web3forms to mail contact form data -->
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("form-status");
 
-  // <!-- emailjs to mail contact form data -->
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Form Submitted Successfully");
+          form.reset(); // ✅ clear form fields
+        } else {
+          alert("Form Submission Failed");
+        }
+      })
+      .catch((error) => {
+        alert("An error occurred while submitting the form.");
+      });
+  });
+  // <!-- web3forms to mail contact form data -->
 });
 
 document.addEventListener("visibilitychange", function () {
@@ -207,3 +229,10 @@ srtop.reveal(".experience .timeline .container", { interval: 400 });
 /* SCROLL CONTACT */
 srtop.reveal(".contact .container", { delay: 400 });
 srtop.reveal(".contact .container .form-group", { delay: 400 });
+
+const nav = performance.getEntriesByType("navigation")[0];
+if (nav && nav.type === "reload") {
+  // Remove any anchor from the URL and go to top
+  window.location.hash = "";
+  window.scrollTo(0, 0); // scroll to top just in case
+}

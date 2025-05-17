@@ -60,6 +60,12 @@ function showProjects(projects) {
   });
   projectsContainer.innerHTML = projectsHTML;
 
+  // <!-- tilt js effect for project section starts -->
+  VanillaTilt.init(document.querySelectorAll(".tilt"), {
+    max: 15,
+  });
+  // <!-- tilt js effect ends -->
+
   // isotope filter products
   var $grid = $(".box-container").isotope({
     itemSelector: ".grid-item",
