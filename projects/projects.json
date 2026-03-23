@@ -1,4 +1,14 @@
 [
+   {
+    "name": "CGPA Calculator",
+    "desc": "A professional CGPA calculator. Add subjects, credits, and grades per semester. Save results and share via link.",
+    "image": "cgpa-project",
+    "category": "basicweb",
+    "links": {
+      "view": "./projects/cgpa.html",
+      "code": "https://github.com/niraj5511/CGPA-Calculator"
+    }
+  },
   {
     "name": "Book Search",
     "desc": "A Web based platform made using react for searching books using google books api.",
@@ -20,4 +30,6 @@
       "code": "https://github.com/niraj5511/portfolio"
     }
   }
+
+ 
 ]

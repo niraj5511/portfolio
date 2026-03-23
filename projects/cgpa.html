@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="title" content="CGPA Calculator by Niraj Bhusal">
+<meta name="description" content="Calculate your CGPA semester-wise online for free. Professional marksheet PDF download.">
+<meta name="keywords" content="CGPA calculator, pou cgpa calculator, pokhara university cgpa calculator, pokhara university sgpa calculator, GPA calculator, online CGPA, semester GPA, marksheet download, Niraj Bhusal">
+<title>CGPA Calculator</title>
+
+<!-- jsPDF & AutoTable CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background: #0f172a; color: #fff; padding: 20px; }
+h1 { text-align: center; margin-bottom: 20px; }
+.container { max-width: 1100px; margin: auto; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 20px; }
+.card { background: #1e293b; padding: 15px; border-radius: 10px; position: relative; }
+.card button.remove-sem { position: absolute; top: 10px; right: 10px; background: #ef4444; color: white; border: none; padding: 4px 6px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+.row { display: flex; gap: 6px; margin-bottom: 8px; }
+.small { flex: 1; padding: 6px; font-size: 14px; border-radius: 6px; border: none; }
+button { padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.add-btn { background: #38bdf8; }
+.remove-btn { background: #ef4444; color: white; }
+.generate-btn { background: #22c55e; }
+.add-subject-btn { background: #fbbf24; }
+.result { margin-top: 8px; font-size: 14px; color: #38bdf8; }
+.final { text-align: center; margin-top: 20px; font-size: 20px; color: #22c55e; }
+.actions { text-align: center; margin: 20px 0; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>CGPA Calculator</h1>
+
+  <div class="grid" id="semesters"></div>
+
+  <div class="actions">
+    <button class="add-btn" onclick="addSemester()">+ Add Semester</button>
+    <button class="generate-btn" onclick="calculateCGPA()">Calculate CGPA</button>
+    <button onclick="downloadPDF()">Download PDF</button>
+  </div>
+
+  <div class="final" id="finalResult"></div>
+</div>
+
+<script>
+let semesterCount = 0;
+
+function addSemester() {
+  semesterCount++;
+  let div = document.createElement("div");
+  div.className = "card";
+  div.id = "sem" + semesterCount;
+
+  div.innerHTML = `
+    <button class="remove-sem" onclick="this.parentElement.remove()">Remove Semester</button>
+    <h3>Semester ${semesterCount}</h3>
+
+    <div class="row">
+      <input type="number" placeholder="No. of Subjects" id="count${semesterCount}" class="small">
+      <button class="generate-btn" onclick="generateSubjects(${semesterCount})">Generate</button>
+      <button class="add-subject-btn" onclick="addSubject(${semesterCount})">Add Subject</button>
+    </div>
+
+    <div class="subjects"></div>
+
+    <div class="result" id="semResult${semesterCount}"></div>
+  `;
+
+  document.getElementById("semesters").appendChild(div);
+}
+
+function generateSubjects(id) {
+  let count = document.getElementById("count" + id).value;
+  for (let i = 0; i < count; i++) {
+    addSubject(id);
+  }
+}
+
+function addSubject(id) {
+  let container = document.querySelector(`#sem${id} .subjects`);
+  let row = document.createElement("div");
+  row.className = "row";
+  row.innerHTML = `
+    <input type="number" placeholder="Credits" class="credit small">
+    <select class="grade small">
+      <option value="4">A</option>
+      <option value="3.7">A-</option>
+      <option value="3.3">B+</option>
+      <option value="3">B</option>
+      <option value="2.7">B-</option>
+      <option value="2.3">C+</option>
+      <option value="2">C</option>
+      <option value="1.7">C-</option>
+      <option value="1.3">D+</option>
+      <option value="1.0">D</option>
+      <option value="0">F</option>
+    </select>
+    <button class="remove-btn" onclick="this.parentElement.remove()">X</button>
+  `;
+  container.appendChild(row);
+}
+
+function calculateCGPA() {
+  let totalCredits = 0;
+  let totalPoints = 0;
+
+  for (let i = 1; i <= semesterCount; i++) {
+    let sem = document.getElementById("sem" + i);
+    if (!sem) continue;
+
+    let credits = sem.querySelectorAll(".credit");
+    let grades = sem.querySelectorAll(".grade");
+
+    let semCredits = 0;
+    let semPoints = 0;
+
+    for (let j = 0; j < credits.length; j++) {
+      let c = parseFloat(credits[j].value);
+      let g = parseFloat(grades[j].value);
+      if (!isNaN(c)) {
+        semCredits += c;
+        semPoints += c * g;
+      }
+    }
+
+    let gpa = semPoints / semCredits || 0;
+    document.getElementById("semResult" + i).innerText =
+      `Credits: ${semCredits} | Honor Points: ${semPoints.toFixed(2)} | GPA: ${gpa.toFixed(2)}`;
+
+    totalCredits += semCredits;
+    totalPoints += semPoints;
+  }
+
+  let cgpa = totalPoints / totalCredits || 0;
+  document.getElementById("finalResult").innerText =
+    `Total Credits: ${totalCredits} | Total Points: ${totalPoints.toFixed(2)} | CGPA: ${cgpa.toFixed(2)}`;
+}
+
+// PDF Download with AutoTable and Portfolio Header/Footer
+function downloadPDF() {
+  calculateCGPA();
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Header
+  doc.setFontSize(22);
+  doc.setTextColor(30, 41, 59);
+  doc.text("CGPA Marks Sheet", 105, 25, null, null, "center");
+  doc.setFontSize(10);
+  doc.text(`Generated On: ${new Date().toLocaleString()}`, 14, 30);
+
+  let y = 35;
+
+  for (let i = 1; i <= semesterCount; i++) {
+    let sem = document.getElementById("sem" + i);
+    if (!sem) continue;
+
+    let credits = sem.querySelectorAll(".credit");
+    let grades = sem.querySelectorAll(".grade");
+
+    const tableData = [];
+    let semPoints = 0;
+    let semCredits = 0;
+
+    for (let j = 0; j < credits.length; j++) {
+      let c = parseFloat(credits[j].value) || 0;
+      let g = parseFloat(grades[j].value) || 0;
+      let points = c * g;
+      semPoints += points;
+      semCredits += c;
+      tableData.push([
+        j + 1,
+        c,
+        grades[j].options[grades[j].selectedIndex].text,
+        points.toFixed(2)
+      ]);
+    }
+
+    doc.autoTable({
+      startY: y,
+      head: [['S.No', 'Credits', 'Grade', 'Honor Points']],
+      body: tableData,
+      theme: 'grid',
+      headStyles: { fillColor: [30, 41, 59], textColor: [255, 255, 255] },
+      styles: { fontSize: 11, cellPadding: 2 }
+    });
+
+    y = doc.lastAutoTable.finalY + 5;
+    doc.text(`Semester ${i} Total Credits: ${semCredits} | Total Points: ${semPoints.toFixed(2)} | GPA: ${(semPoints/semCredits).toFixed(2)}`, 14, y);
+    y += 10;
+  }
+
+  // Footer
+  let finalRes = document.getElementById("finalResult").innerText;
+  doc.setFontSize(12);
+  doc.text(finalRes, 14, y + 5);
+  doc.setFontSize(9);
+  doc.text("Generated by Niraj Bhusal", 105, 290, null, null, "center");
+
+  doc.save("CGPA_Marksheet.pdf");
+}
+</script>
+
+</body>
+</html>
