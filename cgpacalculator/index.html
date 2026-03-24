@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="title" content="CGPA Calculator by Niraj Bhusal">
-<meta name="description" content="Calculate your CGPA semester-wise online for free. Professional marksheet PDF download.">
+<meta name="description" content="Free online CGPA calculator for Pokhara University students of Nepal. Calculate semester-wise GPA and download marksheet PDF instantly.">
 <meta name="keywords" content="CGPA calculator, pou cgpa calculator, pokhara university cgpa calculator, pokhara university sgpa calculator, GPA calculator, online CGPA, semester GPA, marksheet download, Niraj Bhusal">
-<title>CGPA Calculator</title>
+<title>CGPA Calculator Nepal | Free GPA Calculator with PDF | Niraj Bhusal</title>
 
 <!-- jsPDF & AutoTable CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -15,14 +15,14 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 body { background: #0f172a; color: #fff; padding: 20px; }
-h1 { text-align: center; margin-bottom: 20px; }
+h1, h2 { text-align: center; margin-bottom: 20px; }
 .container { max-width: 1100px; margin: auto; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 20px; }
 .card { background: #1e293b; padding: 15px; border-radius: 10px; position: relative; }
 .card button.remove-sem { position: absolute; top: 10px; right: 10px; background: #ef4444; color: white; border: none; padding: 4px 6px; border-radius: 6px; cursor: pointer; font-size: 12px; }
 .row { display: flex; gap: 6px; margin-bottom: 8px; }
 .small { flex: 1; padding: 6px; font-size: 14px; border-radius: 6px; border: none; }
-button { padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; }
+button { padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer; font-size: 18px; }
 .add-btn { background: #38bdf8; }
 .remove-btn { background: #ef4444; color: white; }
 .generate-btn { background: #22c55e; }
@@ -36,7 +36,8 @@ button { padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer; f
 <body>
 
 <div class="container">
-  <h1>CGPA Calculator</h1>
+  <h1>Free CGPA Calculator for Pokhara University Students</h1>
+  <h2>Calculate Semester-wise GPA and Download Marksheet</h2>
 
   <div class="grid" id="semesters"></div>
 
@@ -48,6 +49,8 @@ button { padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer; f
 
   <div class="final" id="finalResult"></div>
 </div>
+
+
 
 <script>
 let semesterCount = 0;
@@ -207,6 +210,21 @@ function downloadPDF() {
   doc.save("CGPA_Marksheet.pdf");
 }
 </script>
+<br>
+<br>
+<br>
+<br>
+<section style="margin-top:40px;  color:#cbd5f5;">
+  <h2>About This CGPA Calculator</h2>
+  <p style="text-align: center; margin-bottom: 20px;">
+    This CGPA calculator helps students calculate their GPA and CGPA easily.
+    You can enter subjects, credits, and grades semester-wise and instantly get results.
+  </p>
 
+  <h2>How CGPA is Calculated</h2>
+  <p style="text-align: center; margin-bottom: 20px;">
+    CGPA = Total Honor Points / Total Credits. <br>This tool follows standard grading systems used in Nepal universities like PoU.
+  </p>
+</section>
 </body>
 </html>

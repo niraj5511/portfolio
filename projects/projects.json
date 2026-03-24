@@ -5,7 +5,7 @@
     "image": "cgpa-project",
     "category": "basicweb",
     "links": {
-      "view": "./projects/cgpa.html",
+      "view": "/cgpacalculator",
       "code": "https://github.com/niraj5511/CGPA-Calculator"
     }
   },
