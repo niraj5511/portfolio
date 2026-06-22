@@ -110,6 +110,33 @@
         text-align: center;
         margin: 20px 0;
       }
+      .autofill-btn {
+        background: #a78bfa;
+        color: #fff;
+        font-size: 14px;
+        padding: 8px 14px;
+      }
+      .dept-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .dept-row label {
+        font-size: 14px;
+        color: #94a3b8;
+        white-space: nowrap;
+      }
+      .dept-row select {
+        flex: 1;
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 6px;
+        border: none;
+        background: #0f172a;
+        color: #fff;
+        min-width: 180px;
+      }
     </style>
   </head>
 
@@ -118,7 +145,6 @@
       <h1>Free CGPA Calculator for Pokhara University Students</h1>
       <h2>Calculate Semester-wise GPA and Download Marksheet</h2>
 
-      <!-- ✅ NEW USER INFO SECTION -->
       <div class="card" style="margin-bottom: 20px">
         <div class="row">
           <input
@@ -141,6 +167,16 @@
             class="small"
           />
         </div>
+
+        <!-- Department autofill row -->
+        <div class="dept-row" style="margin-top: 8px;">
+          <label for="deptSelect">Department:</label>
+          <select id="deptSelect">
+            <option value="">-- Select Department --</option>
+            <option value="CE">Computer Engineering</option>
+          </select>
+          <button class="autofill-btn" onclick="autofillDepartment()">⚡ Autofill Subjects</button>
+        </div>
       </div>
 
       <div class="grid" id="semesters"></div>
@@ -159,6 +195,178 @@
     <script>
       let semesterCount = 0;
 
+      // ── Computer Engineering curriculum ──────────────────────────────────
+      const CE_SEMESTERS = [
+        {
+          name: "1st Semester",
+          subjects: [
+            { name: "Basic Electrical Engineering", credits: 3 },
+            { name: "Calculus - I", credits: 3 },
+            { name: "Communication Techniques", credits: 2 },
+            { name: "Computer Workshop", credits: 1 },
+            { name: "Digital Logic", credits: 3 },
+            { name: "Electronic Devices and Circuits", credits: 3 },
+            { name: "Programming in C", credits: 3 },
+          ],
+        },
+        {
+          name: "2nd Semester",
+          subjects: [
+            { name: "Algebra and Geometry", credits: 3 },
+            { name: "Applied Chemistry", credits: 2 },
+            { name: "Applied Physics", credits: 3 },
+            { name: "Basic Engineering Drawing", credits: 1 },
+            { name: "Data Structure and Algorithms", credits: 3 },
+            { name: "Instrumentation", credits: 3 },
+            { name: "Object Oriented Programming in C++", credits: 3 },
+          ],
+        },
+        {
+          name: "3rd Semester",
+          subjects: [
+            { name: "Calculus - II", credits: 3 },
+            { name: "Computer Graphics", credits: 3 },
+            { name: "Data Communication", credits: 3 },
+            { name: "Database Management System", credits: 3 },
+            { name: "Microprocessor and ALP", credits: 3 },
+            { name: "Operating Systems", credits: 3 },
+          ],
+        },
+        {
+          name: "4th Semester",
+          subjects: [
+            { name: "Applied Mathematics", credits: 3 },
+            { name: "Computer Architecture", credits: 3 },
+            { name: "Advanced Programming with Java", credits: 3 },
+            { name: "Numerical Methods", credits: 2 },
+            { name: "Research Fundamentals", credits: 2 },
+            { name: "Theory of Computation", credits: 3 },
+          ],
+        },
+        {
+          name: "5th Semester",
+          subjects: [
+            { name: "Artificial Intelligence", credits: 3 },
+            { name: "Digital Signal Analysis and Processing", credits: 3 },
+            { name: "Embedded System", credits: 2 },
+            { name: "Engineering Management", credits: 2 },
+            { name: "Probability and Statistics", credits: 2 },
+            { name: "Software Engineering", credits: 3 },
+          ],
+        },
+        {
+          name: "6th Semester",
+          subjects: [
+            { name: "Computer Networks", credits: 3 },
+            { name: "Compiler Design", credits: 2 },
+            { name: "Image Processing and Pattern Recognition", credits: 3 },
+            { name: "Machine Learning", credits: 2 },
+            { name: "Simulation and Modelling", credits: 3 },
+            { name: "Project I", credits: 1 },
+            { name: "Elective I", credits: 3 },
+          ],
+        },
+        {
+          name: "7th Semester",
+          subjects: [
+            { name: "Cloud Computing and Virtualization", credits: 2 },
+            { name: "Data Science and Analytics", credits: 2 },
+            { name: "Engineering Economics", credits: 3 },
+            { name: "Entrepreneurship and Professional Practice", credits: 2 },
+            { name: "Network and Cyber Security", credits: 3 },
+            { name: "Elective II", credits: 3 },
+          ],
+        },
+        {
+          name: "8th Semester",
+          subjects: [
+            { name: "Internship", credits: 3 },
+            { name: "Project II", credits: 3 },
+            { name: "Elective III", credits: 3 },
+          ],
+        },
+      ];
+
+      // ── Autofill function ────────────────────────────────────────────────
+      function autofillDepartment() {
+        const dept = document.getElementById("deptSelect").value;
+        if (!dept) {
+          alert("Please select a department first.");
+          return;
+        }
+
+        const curriculum = dept === "CE" ? CE_SEMESTERS : null;
+        if (!curriculum) return;
+
+        // Confirm if semesters already exist
+        if (semesterCount > 0) {
+          if (!confirm("This will clear all existing semesters and autofill with the selected department's subjects. Continue?")) return;
+        }
+
+        // Clear existing semesters
+        document.getElementById("semesters").innerHTML = "";
+        semesterCount = 0;
+
+        // Build each semester
+        curriculum.forEach((semData, idx) => {
+          semesterCount++;
+          const semId = semesterCount;
+
+          const div = document.createElement("div");
+          div.className = "card";
+          div.id = "sem" + semId;
+
+          div.innerHTML = `
+            <button class="remove-sem" onclick="this.parentElement.remove()">Remove Semester</button>
+            <h3>${semData.name}</h3>
+            <div class="row">
+              <input type="number" placeholder="No. of Subjects" id="count${semId}" class="small">
+              <button class="generate-btn" onclick="generateSubjects(${semId})">Generate</button>
+              <button class="add-subject-btn" onclick="addSubject(${semId})">Add Subject</button>
+              <button class="generate-btn" onclick="calculateSGPA(${semId})">SGPA</button>
+            </div>
+            <div class="subjects"></div>
+            <div class="result" id="semResult${semId}"></div>
+          `;
+
+          document.getElementById("semesters").appendChild(div);
+
+          // Add prefilled subject rows
+          semData.subjects.forEach(subj => {
+            addSubjectWithData(semId, subj.name, subj.credits);
+          });
+        });
+      }
+
+      // ── Add a subject row pre-filled with name and credits ───────────────
+      function addSubjectWithData(id, subjectName, credits) {
+        const container = document.querySelector(`#sem${id} .subjects`);
+        const row = document.createElement("div");
+        row.className = "row";
+
+        row.innerHTML = `
+          <input type="text" placeholder="Subject" class="subject small" value="${subjectName}">
+          <input type="number" placeholder="Credits" class="credit small" value="${credits}">
+          <select class="grade small">
+            <option value="4">A</option>
+            <option value="3.7">A-</option>
+            <option value="3.3">B+</option>
+            <option value="3">B</option>
+            <option value="2.7">B-</option>
+            <option value="2.3">C+</option>
+            <option value="2">C</option>
+            <option value="1.7">C-</option>
+            <option value="1.3">D+</option>
+            <option value="1.0">D</option>
+            <option value="0">F</option>
+          </select>
+          <button class="remove-btn" onclick="this.parentElement.remove()">X</button>
+        `;
+
+        container.appendChild(row);
+      }
+
+      // ── Existing functions (unchanged) ───────────────────────────────────
       function addSemester() {
         semesterCount++;
         let div = document.createElement("div");
@@ -282,7 +490,6 @@
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // ✅ GET USER DATA
         const name = document.getElementById("studentName").value || "-";
         const symbol = document.getElementById("symbolNo").value || "-";
         const reg = document.getElementById("regNo").value || "-";
@@ -290,7 +497,6 @@
         doc.setFontSize(20);
         doc.text("CGPA Marksheet", 105, 20, null, null, "center");
 
-        // ✅ ADD USER INFO
         doc.setFontSize(12);
         doc.text(`Name: ${name}`, 14, 30);
         doc.text(`Symbol No: ${symbol}`, 14, 36);
